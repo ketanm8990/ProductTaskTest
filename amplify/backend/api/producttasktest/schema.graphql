@@ -1,0 +1,15 @@
+type Category @model {
+  id: ID!
+  name: String!
+  products: [Product] @connection(keyName: "byProduct", fields: ["id"])
+}
+
+type Product @model @key(name: "byProduct", fields: ["categoryID"]) {
+  id: ID!
+  name: String!
+  description: String!
+  price: Int!
+  quantity : Int!  
+  categoryID: ID!
+  category: Category @connection(fields: ["categoryID"])
+}
